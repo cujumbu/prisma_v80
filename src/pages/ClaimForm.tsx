@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import BrandSelector from '../components/BrandSelector';
 
 interface ClaimFormData {
@@ -15,6 +16,7 @@ interface ClaimFormData {
 }
 
 const ClaimForm: React.FC = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<ClaimFormData>({
     orderNumber: '',
     email: '',
@@ -50,7 +52,7 @@ const ClaimForm: React.FC = () => {
     setIsSubmitting(true);
 
     if (!notificationAcknowledged) {
-      setError('Please acknowledge the brand-specific notification before submitting.');
+      setError(t('pleaseAcknowledgeNotification'));
       setIsSubmitting(false);
       return;
     }
@@ -65,12 +67,12 @@ const ClaimForm: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error || data.details || 'Failed to submit claim');
+        throw new Error(data.error || data.details || t('failedToSubmitClaim'));
       }
       navigate('/status', { state: { claimId: data.id } });
     } catch (error) {
       console.error('Error submitting claim:', error);
-      setError(error.message || 'An error occurred while submitting the claim. Please try again.');
+      setError(error.message || t('errorSubmittingClaim'));
     } finally {
       setIsSubmitting(false);
     }
@@ -78,11 +80,11 @@ const ClaimForm: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Submit a Claim</h2>
+      <h2 className="text-2xl font-bold mb-4">{t('submitClaim')}</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="orderNumber" className="block text-sm font-medium text-gray-700">Order Number</label>
+          <label htmlFor="orderNumber" className="block text-sm font-medium text-gray-700">{t('orderNumber')}</label>
           <input
             type="text"
             id="orderNumber"
@@ -94,7 +96,7 @@ const ClaimForm: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">{t('email')}</label>
           <input
             type="email"
             id="email"
@@ -106,7 +108,7 @@ const ClaimForm: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">{t('name')}</label>
           <input
             type="text"
             id="name"
@@ -118,7 +120,7 @@ const ClaimForm: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="street" className="block text-sm font-medium text-gray-700">Street (for return shipping)</label>
+          <label htmlFor="street" className="block text-sm font-medium text-gray-700">{t('street')}</label>
           <input
             type="text"
             id="street"
@@ -130,7 +132,7 @@ const ClaimForm: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">Postal Code (for return shipping)</label>
+          <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">{t('postalCode')}</label>
           <input
             type="text"
             id="postalCode"
@@ -142,7 +144,7 @@ const ClaimForm: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700">City (for return shipping)</label>
+          <label htmlFor="city" className="block text-sm font-medium text-gray-700">{t('city')}</label>
           <input
             type="text"
             id="city"
@@ -154,7 +156,7 @@ const ClaimForm: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">Phone Number</label>
+          <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">{t('phoneNumber')}</label>
           <input
             type="tel"
             id="phoneNumber"
@@ -167,7 +169,7 @@ const ClaimForm: React.FC = () => {
         </div>
         <BrandSelector onBrandSelect={handleBrandSelect} onNotificationAcknowledge={handleNotificationAcknowledge} />
         <div>
-          <label htmlFor="problemDescription" className="block text-sm font-medium text-gray-700">Problem Description</label>
+          <label htmlFor="problemDescription" className="block text-sm font-medium text-gray-700">{t('problemDescription')}</label>
           <textarea
             id="problemDescription"
             name="problemDescription"
@@ -183,7 +185,7 @@ const ClaimForm: React.FC = () => {
           disabled={isSubmitting || !notificationAcknowledged}
           className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
         >
-          {isSubmitting ? 'Submitting...' : 'Submit Claim'}
+          {isSubmitting ? t('submitting') : t('submit')}
         </button>
       </form>
     </div>
