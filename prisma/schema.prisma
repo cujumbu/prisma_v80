@@ -1,0 +1,16 @@
+// Add this model to your schema.prisma file
+model BrandNotification {
+  id        String @id @default(uuid())
+  brandId   String
+  language  String
+  content   String
+  brand     Brand  @relation(fields: [brandId], references: [id])
+  @@unique([brandId, language])
+}
+
+model Brand {
+  id            String              @id @default(uuid())
+  name          String              @unique
+  notification  String
+  notifications BrandNotification[]
+}
