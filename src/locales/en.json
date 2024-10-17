@@ -17,6 +17,7 @@
   "brand": "Brand",
   "problemDescription": "Problem Description",
   "submit": "Submit",
+  "submitting": "Submitting...",
   "checkClaimStatus": "Check Claim Status",
   "status": "Status",
   "submissionDate": "Submission Date",
@@ -25,5 +26,13 @@
   "searchByOrderNumber": "Search by Order Number",
   "actions": "Actions",
   "viewDetails": "View Details",
-  "close": "Close"
+  "close": "Close",
+  "welcomeMessage": "Welcome to Our Warranty Claims Portal",
+  "homeDescription": "Easy and efficient warranty claim management for our valued customers.",
+  "footerText": "© {{year}} Warranty Claims Portal. All rights reserved.",
+  "pending": "Pending",
+  "inProgress": "In Progress",
+  "resolved": "Resolved",
+  "rejected": "Rejected",
+  "claimStatus": "Claim Status"
 }
