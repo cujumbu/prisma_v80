@@ -34,5 +34,14 @@
   "inProgress": "In Progress",
   "resolved": "Resolved",
   "rejected": "Rejected",
-  "claimStatus": "Claim Status"
+  "claimStatus": "Claim Status",
+  "failedToFetchClaim": "Failed to fetch claim",
+  "errorFetchingClaim": "An error occurred while fetching the claim",
+  "noClaimFound": "No claim found",
+  "pleaseAcknowledgeNotification": "Please acknowledge the brand notification",
+  "failedToSubmitClaim": "Failed to submit claim",
+  "errorSubmittingClaim": "An error occurred while submitting the claim",
+  "selectBrand": "Select a brand",
+  "importantNotice": "Important Notice",
+  "acknowledgeInformation": "I acknowledge this information"
 }
